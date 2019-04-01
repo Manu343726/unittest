@@ -28,14 +28,21 @@ target_link_libraries(unittest INTERFACE
     CONAN_PKG::ctti
     CONAN_PKG::CTRE
     CONAN_PKG::fmt
+    CONAN_PKG::backward
+    CONAN_PKG::elfspy
+    dw
+)
+target_compile_definitions(unittest INTERFACE
+    BACKWARD_HAS_BACKTRACE=0
+    BACKWARD_HAS_BACKTRACE_SYMBOL=1
+    BACKWARD_HAS_BFD=0
+    BACKWARD_HAS_DW=1
+    BACKWARD_HAS_UNWIND=1
 )
 
 option(UNITTESTS_BUILD_EXAMPLES "Build unittest examples" ${UNITTEST_IS_MAIN_PROJECT})
 
 if(UNITTESTS_BUILD_EXAMPLES)
-    add_executable(unittest.example example.cpp)
-    target_link_libraries(unittest.example PRIVATE unittest)
-
     find_package(tinyrefl_tool REQUIRED)
-    tinyrefl_tool(TARGET unittest.example HEADERS example.hpp)
+    add_subdirectory(examples)
 endif()
