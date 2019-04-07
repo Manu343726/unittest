@@ -2,12 +2,12 @@
 #include <libexample/example.hpp>
 #include <libexample/example.hpp.tinyrefl>
 
-namespace testing
+namespace test_example
 {
 
 struct ExampleTestCase : public unittest::TestCase
 {
-    [[unittest::patch("mynamespace::ExampleClass::identity(int) const", return_value=3)]]
+    [[unittest::patch("mynamespace::ExampleClass::identity(int) const")]]
     void test_another_one_bites_the_dust(unittest::MethodSpy<int(int)>& identity)
     {
         mynamespace::ExampleClass object;

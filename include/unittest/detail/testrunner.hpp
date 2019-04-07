@@ -51,11 +51,16 @@ struct AssertionFailure
 
 int print_failures(const std::vector<AssertionFailure>& failures, const int totalTestsRun, const std::chrono::milliseconds& elapsedTime)
 {
+    std::size_t longest_separator_length = 0;
+
     for(const auto& failure : failures)
     {
-        fmt::print(stderr, "\n====================================================\n");
-        fmt::print(stderr, "FAIL: {} ({})\n", failure.methodName, failure.testCaseName);
-        fmt::print(stderr, "----------------------------------------------------\n");
+        const auto failure_title = fmt::format("FAIL: {} ({})\n", failure.methodName, failure.testCaseName);
+        const std::string hard_separator(failure_title.size() + 1, '=');
+        const std::string soft_separator(failure_title.size() + 1, '-');
+        fmt::print(stderr, "\n{}\n", hard_separator);
+        fmt::print(stderr, failure_title);
+        fmt::print(stderr, "{}\n", soft_separator);
 
         if(failure.backtrace)
         {
@@ -64,9 +69,11 @@ int print_failures(const std::vector<AssertionFailure>& failures, const int tota
         }
 
         fmt::print(stderr, "\n{}\n", failure.message);
+
+        longest_separator_length = std::max(longest_separator_length, soft_separator.size());
     }
 
-    fmt::print("\n----------------------------------------------------\n");
+    fmt::print("\n{}\n", std::string(longest_separator_length, '-'));
     fmt::print("Ran {} tests in {: .3f}s\n", totalTestsRun, elapsedTime.count() / 1000.0f);
 
     if(failures.empty())
