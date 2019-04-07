@@ -52,7 +52,7 @@ Here is a full example of a unit test case with `unittest`:
 #include <libexample/example.hpp>
 #include <libexample/example.hpp.tinyrefl>
 
-namespace testing
+namespace test_example
 {
 
 struct ExampleTestCase : public unittest::TestCase
