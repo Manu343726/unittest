@@ -4,6 +4,9 @@
 #include <unittest/detail/exceptions.hpp>
 #include <elfspy/SPY.h>
 #include <tinyrefl/api.hpp>
+#include <any>
+
+inline std::any return_value;
 
 namespace unittest
 {
@@ -18,10 +21,10 @@ struct MethodSpy<R(Args...)>
 
     using CallArgs = std::tuple<Args...>;
 
-    virtual bool assert_called() = 0;
-    virtual bool assert_called_once() = 0;
-    virtual bool assert_called_once_with(Args... args) = 0;
-    virtual bool assert_called_with(Args... args) = 0;
+    virtual void assert_called() = 0;
+    virtual void assert_called_once() = 0;
+    virtual void assert_called_once_with(Args... args) = 0;
+    virtual void assert_called_with(Args... args) = 0;
     virtual std::vector<std::tuple<std::decay_t<Args>...>> call_args_list() = 0;
 };
 

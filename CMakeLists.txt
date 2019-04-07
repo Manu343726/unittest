@@ -33,16 +33,16 @@ target_link_libraries(unittest INTERFACE
     dw
 )
 target_compile_definitions(unittest INTERFACE
-    BACKWARD_HAS_BACKTRACE=0
-    BACKWARD_HAS_BACKTRACE_SYMBOL=1
-    BACKWARD_HAS_BFD=0
-    BACKWARD_HAS_DW=1
     BACKWARD_HAS_UNWIND=1
+    BACKWARD_HAS_BACKTRACE=0
+    BACKWARD_HAS_BACKTRACE_SYMBOL=0
+    BACKWARD_HAS_DW=1
+    BACKWARD_HAS_BFD=0
 )
 
 option(UNITTESTS_BUILD_EXAMPLES "Build unittest examples" ${UNITTEST_IS_MAIN_PROJECT})
 
 if(UNITTESTS_BUILD_EXAMPLES)
-    find_package(tinyrefl_tool REQUIRED)
+    include(unittest.cmake)
     add_subdirectory(examples)
 endif()

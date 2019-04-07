@@ -7,13 +7,13 @@ namespace testing
 
 struct ExampleTestCase : public unittest::TestCase
 {
-    [[unittest::patch("mynamespace::ExampleClass::identity(int) const")]]
+    [[unittest::patch("mynamespace::ExampleClass::identity(int) const", return_value=3)]]
     void test_another_one_bites_the_dust(unittest::MethodSpy<int(int)>& identity)
     {
         mynamespace::ExampleClass object;
 
         self.assertEqual(object.methodThatCallsIdentity(), 42);
-        identity.assert_called_once_with(42);
+        identity.assert_called_once_with(43);
     }
 };
 
