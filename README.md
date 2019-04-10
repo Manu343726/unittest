@@ -158,6 +158,14 @@ $ make
 $ ctest . -V
 ```
 
+## Roadmap
+
+ - [ ] Mocking full classes with one patch call
+ - [ ] Multiple patch calls in one test
+ - [ ] Namespaces with free functions as test cases
+ - [ ] Mocking of private methods
+ - [ ] `patch("method", return_value=foo)` syntax
+
 ## Documentation
 
 Yeah, sorry, this is a work in progress PoC. Tthe code is given as ugly as it
