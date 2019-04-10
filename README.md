@@ -168,7 +168,7 @@ $ ctest . -V
 
 ## Documentation
 
-Yeah, sorry, this is a work in progress PoC. Tthe code is given as ugly as it
+Yeah, sorry, this is a work in progress PoC. The code is given as ugly as it
 looks without any comment or docstring that could make things clear.
 
 ## License
